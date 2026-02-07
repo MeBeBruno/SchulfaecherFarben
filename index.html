@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Schulfächer-Farben NRW</title>
+	<style>
+		:root {
+			--bg-page: #f4f4f4;
+			--bg-card: #ffffff;
+			--text-main: #333;
+			--radius: 2rem;
+			--spacing: 2rem;
+		}
+
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+
+		body {
+			font-family: system-ui, -apple-system, sans-serif;
+			background-color: var(--bg-page);
+			color: var(--text-main);
+			padding: var(--spacing);
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			transform-origin: top center; 
+		}
+
+		main {
+			flex: 1;
+			max-width: 800px;
+			margin: 0 auto;
+			width: 100%;
+		}
+
+		.field {
+			background: linear-gradient(in oklab to bottom, 
+				oklch(97% 0.01 var(--h-start)), 
+				oklch(97% 0.01 var(--h-end))
+			);
+			padding: var(--spacing);
+			margin-bottom: var(--spacing);
+			border-radius: var(--radius);
+			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+			break-inside: avoid; 
+		}
+
+		h1 {
+			font-size: 1.5rem;
+			margin-bottom: 1.5rem;
+			transition: color 0.2s ease;
+		}
+
+		ul {
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 0.8rem;
+		}
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 0.8rem;
+			padding: 0.8rem 1.2rem;
+			border-radius: 1rem;
+			font-weight: 600;
+			background-color: oklch(90% 0.15 var(--h)); 
+			color: oklch(10% 0.05 calc(var(--h) + 180));
+			border: 1px solid oklch(80% 0.1 var(--h));
+			transition: transform 0.2s ease;
+		}
+
+		li::before {
+			content: '';
+			width: 1rem;
+			height: 1rem;
+			border-radius: 50%;
+			background-color: oklch(80% 0.37 var(--s));
+			box-shadow: 0 0 0 2px white, 0 0 0 3px oklch(80% 0.37 var(--s));
+		}
+
+		footer {
+			margin-top: auto;
+			text-align: center;
+			padding-top: 2rem;
+			font-size: 0.9rem;
+			color: #666;
+			border-top: 1px solid rgba(0,0,0,0.1);
+		}
+
+		footer a {
+			color: inherit;
+			text-decoration: underline;
+			text-underline-offset: 4px;
+		}
+
+		.pdf-btn {
+			position: fixed;
+			top: 1.5rem;
+			right: 1.5rem;
+			background-color: #333;
+			color: white;
+			border: none;
+			padding: 0.8rem 1.2rem;
+			border-radius: 2rem;
+			font-weight: 600;
+			cursor: pointer;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+			transition: all 0.2s ease;
+			z-index: 1000;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.pdf-btn:hover {
+			background-color: #000;
+			transform: scale(1.05);
+		}
+
+		.pdf-btn svg {
+			width: 1.2em;
+			height: 1.2em;
+		}
+
+		body.print-force {
+			--bg-page: #fff;
+			--spacing: 0.8rem;
+			--radius: 0.8rem;
+			background-color: white;
+			padding: 0;
+			width: 100%;
+			height: auto;
+			overflow: visible;
+		}
+
+		body.print-force .field {
+			box-shadow: none;
+			border: 1px solid #eee;
+			margin-bottom: 0.5rem;
+		}
+
+		body.print-force .pdf-btn,
+		body.print-force footer {
+			display: none !important;
+		}
+
+		body.print-force h1 {
+			font-size: 1.2rem;
+			margin-bottom: 0.8rem;
+		}
+
+		body.print-force li {
+			padding: 0.5rem 0.8rem;
+			gap: 0.5rem;
+			font-size: 0.9rem;
+		}
+
+		@media print {
+			@page {
+				margin: 0.5cm;
+				size: A4;
+			}
+			body {
+				-webkit-print-color-adjust: exact;
+				print-color-adjust: exact;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<button class="pdf-btn" id="printBtn">
+		<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+		</svg>
+		Als PDF speichern
+	</button>
+
+	<main>
+		<div class="field" id="sprachlich-literarischer-lernbereich">
+			<h1>Sprachlich-literarischer Lernbereich</h1>
+			<ul>
+				<li>Deutsch</li>
+				<li>Kunst</li>
+				<li>Musik</li>
+				<li>Literatur</li>
+				<li>Fremdsprachen</li>
+			</ul>
+		</div>
+
+		<div class="field" id="mint">
+			<h1>Mathematik, Informatik, Naturwissenschaften, Technik (MINT)</h1>
+			<ul>
+				<li>Mathematik</li>
+				<li>Informatik</li>
+				<li>Biologie</li>
+				<li>Chemie</li>
+				<li>Physik</li>
+				<li>Technik</li>
+				<li>Ernährungslehre</li>
+			</ul>
+		</div>
+
+		<div class="field" id="gesellschaftslehre">
+			<h1>Gesellschaftslehre</h1>
+			<ul>
+				<li>Erdkunde</li>
+				<li>Geschichte</li>
+				<li>Politik</li>
+				<li>Sozialwissenschaften</li>
+				<li>Erziehungswissenschaft</li>
+				<li>Philosophie</li>
+				<li>Psychologie</li>
+				<li>Recht</li>
+			</ul>
+		</div>
+	</main>
+
+	<footer>
+		<span id="year"></span> Bruno | <a href="#" target="_blank">Dokumentation ansehen</a>
+	</footer>
+
+	<script>
+		document.getElementById('year').textContent = "© " + new Date().getFullYear();
+
+		const config = {
+			baseHue: 100,
+			offset: 0,
+			snap: 45
+		};
+
+		const sectors = [
+			'sprachlich-literarischer-lernbereich',
+			'mint',
+			'gesellschaftslehre'
+		];
+
+		sectors.forEach((id, sectorIndex) => {
+			const container = document.getElementById(id);
+			if (!container) return;
+
+			const items = container.querySelectorAll('li');
+			const h1 = container.querySelector('h1');
+
+			const sectorStart = config.baseHue + (sectorIndex * 120);
+			const step = 120 / items.length;
+			
+			const sectorEnd = sectorStart + ((items.length - 1) * step);
+			
+			container.style.setProperty('--h-start', sectorStart);
+			container.style.setProperty('--h-end', sectorEnd);
+
+			const avgHue = (sectorStart + sectorEnd) / 2;
+
+			if (h1) {
+				h1.style.color = `oklch(3% 0.01 ${avgHue + 180})`;
+			}
+
+			items.forEach((li, i) => {
+				const h = sectorStart + (i * step);
+				const s = Math.round((h + config.offset) / config.snap) * config.snap;
+				
+				li.style.setProperty('--h', h);
+				li.style.setProperty('--s', s);
+			});
+		});
+
+		const btn = document.getElementById('printBtn');
+		
+		btn.addEventListener('click', () => {
+			document.body.classList.add('print-force');
+
+			setTimeout(() => {
+				const bodyHeight = document.body.scrollHeight;
+				const a4HeightPx = 1100;
+
+				if (bodyHeight > a4HeightPx) {
+					const scale = a4HeightPx / bodyHeight;
+					document.body.style.zoom = scale;
+				}
+
+				window.print();
+			}, 50);
+		});
+
+		window.addEventListener('afterprint', () => {
+			document.body.classList.remove('print-force');
+			document.body.style.zoom = '';
+		});
+
+		window.matchMedia('print').addEventListener('change', (mql) => {
+			if (!mql.matches) {
+				document.body.classList.remove('print-force');
+				document.body.style.zoom = '';
+			}
+		});
+	</script>
+</body>
+</html>
